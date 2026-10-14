@@ -73,23 +73,29 @@ function resolveBarronTactic(areaInfo, kingdomID) {
 
 function getUnitMatcher(req) {
     if (!req) return null
-    if (req.role === "dummy") return null
     const name = (req.name || "").toLowerCase().trim().replace(/^[\+\*\s]+/, '')
 
-    // 1. Heavy Ranged: Hc, Vhc, Hcb, etc. (Tier 2/3 ranged, rangeAttack >= 85)
+    // 1. Dummy: explicitly marked as dummy, count == 1, or sacrificial units (martyr, sp, spear)
+    // Any light melee or basic unit in dPool can function as dummy!
+    if (req.role === "dummy" || req.count === 1 || ['sp', 'spear', 'spearmen', 'martyr'].includes(name)) {
+        return null // Handled directly via dPool
+    }
+
+    // 2. Heavy Ranged: Hc, Vhc, Hcb, etc. (Tier 2/3 ranged, rangeAttack >= 85)
     if (['hc', 'hcb', 'vhc', 'vcb'].includes(name) || name.includes('hc')) {
         return (u) => Number(u.unitInfo.rangeAttack || 0) >= 85
     }
-    // 2. Light / Basic Ranged: Cb, Crossbowmen, Bow, Bowman (Tier 1 ranged, rangeAttack < 85)
+    // 3. Light / Basic Ranged: Cb, Crossbowmen, Bow, Bowman (Tier 1 ranged, rangeAttack < 85)
     if (['cb', 'crossbowmen', 'bow', 'bm'].includes(name) || name.includes('cb')) {
         return (u) => Number(u.unitInfo.rangeAttack || 0) < 85
     }
-    // 3. Heavy Melee: Ths, Th, Vmm, Vm, Berserkers, Knights (Tier 2/3 melee, meleeAttack >= 100)
+    // 4. Heavy Melee: Ths, Th, Vmm, Vm, Berserkers, Knights (Tier 2/3 melee, meleeAttack >= 100)
     if (['ths', 'th', 'vmm', 'vm', 'beserkers', 'knight', 'knights'].includes(name) || name.includes('ths') || name.includes('vmm')) {
         return (u) => Number(u.unitInfo.meleeAttack || 0) >= 100
     }
-    // 4. Light / Basic Melee: Mm, Macemen, Sw, Sm (Tier 1 melee, meleeAttack < 100)
-    if (['mm', 'macemen', 'sw', 'sm'].includes(name) || name.includes('mm')) {
+    // 5. Light / Basic Melee: Mm, Macemen, Sw, Sm, Sp (Tier 1 melee, meleeAttack < 100)
+    // All light melee (Maceros, Espadachines, Piqueros) can fulfill this!
+    if (['mm', 'macemen', 'sw', 'sm', 'sp', 'spear', 'spearmen'].includes(name) || name.includes('mm') || name.includes('sw')) {
         return (u) => Number(u.unitInfo.meleeAttack || 0) < 100
     }
     return null
@@ -103,8 +109,12 @@ function allocateUnitsToFlank(flankSlots, requirements, mPool, rPool, dPool, max
         let needed = req.count || 0
         if (req.fill || needed <= 0) needed = Math.max(0, maxCapacity - totalAssigned)
 
+        const rawName = (req.name || "").toLowerCase().trim().replace(/^[\+\*\s]+/, '')
+        const isDummy = req.role === "dummy" || req.count === 1 || ['sp', 'spear', 'spearmen', 'martyr'].includes(rawName)
+
         let pool = mPool
-        if (req.role === "dummy") {
+        if (isDummy) {
+            // Any light melee or cheap basic unit in dPool functions as dummy!
             pool = dPool.length > 0 ? dPool : (mPool.length > 0 ? mPool : rPool)
         } else if (req.role === "ranged") {
             pool = rPool.length > 0 ? rPool : mPool
@@ -306,7 +316,10 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 const isDummyCandidate = BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) ||
                     unit.unitInfo.name === "Keep" ||
                     unit.unitInfo.group === "Keep" ||
-                    (isBarracksUnit && Number(unit.unitInfo.costC1 || 0) <= 85 && !unit.unitInfo.costC2)
+                    (isBarracksUnit && !unit.unitInfo.costC2 && (
+                        Number(unit.unitInfo.costC1 || 0) <= 85 ||
+                        (unit.unitInfo.role === "melee" && Number(unit.unitInfo.meleeAttack || 0) < 100)
+                    ))
 
                 const clonedUnit = { unitInfo: unit.unitInfo, amount: unit.amount }
 
@@ -453,7 +466,10 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                                         const count = req.count || 0
                                         totalReq += count
                                         const name = (req.name || "").toLowerCase().trim().replace(/^[\+\*\s]+/, '')
-                                        if (['hc', 'hcb', 'vhc', 'vcb'].includes(name) || name.includes('hc')) {
+                                        const isDummyReq = req.role === "dummy" || req.count === 1 || ['sp', 'spear', 'spearmen', 'martyr'].includes(name)
+                                        if (isDummyReq) {
+                                            // Sacrificial dummies: fulfilled by any light melee or basic dummy troop
+                                        } else if (['hc', 'hcb', 'vhc', 'vcb'].includes(name) || name.includes('hc')) {
                                             reqHeavyRanged += count
                                         } else if (['cb', 'crossbowmen', 'bow', 'bm'].includes(name) || name.includes('cb')) {
                                             reqLightRanged += count
