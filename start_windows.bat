@@ -55,8 +55,9 @@ echo. 2> "website\needsRebuild"
 cd website
 call npm i
 call npm run build
-if exist "website\needsRebuild" del /f /q "needsRebuild"
+if exist "needsRebuild" del /f /q "needsRebuild"
 cd ..
+if exist "website\needsRebuild" del /f /q "website\needsRebuild"
 goto start
 :update
 echo. 2> "update"

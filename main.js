@@ -59,6 +59,68 @@ const ggeConfigExample = `{
 }`
 
 const loggedInUsers = {}
+const maxConsoleLogs = 500
+const consoleLogBuffer = []
+
+let isBroadcasting = false
+function pushAndBroadcastConsoleLog(text, isError = false) {
+  if (isBroadcasting) return
+  isBroadcasting = true
+  try {
+    if (text === undefined || text === null) return
+    const str = String(text).trimEnd()
+    if (!str) return
+
+    const entry = { text: str, isError: Boolean(isError), time: Date.now() }
+    consoleLogBuffer.push(entry)
+    if (consoleLogBuffer.length > maxConsoleLogs) {
+      consoleLogBuffer.shift()
+    }
+
+    const payload = JSON.stringify([
+      ErrorType.Success,
+      ActionType.ConsoleLog,
+      { line: entry }
+    ])
+
+    for (const uuid in loggedInUsers) {
+      const list = loggedInUsers[uuid]
+      if (Array.isArray(list)) {
+        for (const item of list) {
+          if (item && item.ws && item.ws.readyState === 1) {
+            item.ws.send(payload)
+          }
+        }
+      }
+    }
+  } catch (err) {
+  } finally {
+    isBroadcasting = false
+  }
+}
+
+const _origLog = console.log
+const _origInfo = console.info
+const _origWarn = console.warn
+const _origError = console.error
+
+console.log = (...args) => {
+  _origLog(...args)
+  try { pushAndBroadcastConsoleLog(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), false) } catch {}
+}
+console.info = (...args) => {
+  _origInfo(...args)
+  try { pushAndBroadcastConsoleLog(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), false) } catch {}
+}
+console.warn = (...args) => {
+  _origWarn(...args)
+  try { pushAndBroadcastConsoleLog(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), true) } catch {}
+}
+console.error = (...args) => {
+  _origError(...args)
+  try { pushAndBroadcastConsoleLog(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), true) } catch {}
+}
+
 const botMap = new Map()
 
 const userDatabase = new DatabaseSync('./user.db', { timeout: 1000 * 60 })
@@ -542,6 +604,8 @@ async function start() {
                 break
               worker.messageBuffer[worker.messageBufferCount] = [obj[1], obj[2]]
               worker.messageBufferCount = (worker.messageBufferCount + 1) % 25
+              const formattedEventMsg = `[Event] ` + (Array.isArray(obj[2]) ? obj[2].join("") : String(obj[2]))
+              pushAndBroadcastConsoleLog(formattedEventMsg, obj[1] === 2)
               loggedInUsers[uuid]?.forEach(o => {
                 if (o.viewedUser == user.id)
                   o.ws.send(JSON.stringify([ErrorType.Success, ActionType.GetLogs,
@@ -614,9 +678,10 @@ async function start() {
             ws.send(JSON.stringify([ErrorType.Success, ActionType.GetUsers, [getUser(uuid), plugins.filter(e => !e.hidden)]])))
           break
         case ActionType.GetLogs:
-          // console.log("logged something")
           worker.messageBuffer[worker.messageBufferCount] = [obj[1], obj[2]]
           worker.messageBufferCount = (worker.messageBufferCount + 1) % 25
+          const formattedWorkerMsg = `[${user.name}] ` + (Array.isArray(obj[2]) ? obj[2].join("") : String(obj[2]))
+          pushAndBroadcastConsoleLog(formattedWorkerMsg, obj[1] === 2)
           loggedInUsers[uuid]?.forEach(o =>
             o.viewedUser == user.id ? o.ws.send(JSON.stringify([
               ErrorType.Success,
@@ -718,6 +783,12 @@ async function start() {
     loggedInUsers[uuid].push({ ws })
 
     refreshUsers()
+
+    ws.send(JSON.stringify([
+      ErrorType.Success,
+      ActionType.ConsoleLog,
+      { history: consoleLogBuffer }
+    ]))
 
     let users = getUser(uuid)
     users.forEach(user => {
@@ -855,6 +926,14 @@ async function start() {
           loggedInUser.viewedUser = user.id
           loggedInUser.ws.send(JSON.stringify([ErrorType.Success, ActionType.GetLogs,
           [worker.messageBuffer, worker.messageBufferCount]]))
+          break
+        }
+        case ActionType.ConsoleLog: {
+          ws.send(JSON.stringify([
+            ErrorType.Success,
+            ActionType.ConsoleLog,
+            { history: consoleLogBuffer }
+          ]))
           break
         }
         default:

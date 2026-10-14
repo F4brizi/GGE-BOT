@@ -18,5 +18,6 @@
     "GetExternalEvent" : 16,
     "SetPluginOptions" : 17,
     "GetChannels" : 18,
-    "KillBot" : 19
+    "KillBot" : 19,
+    "ConsoleLog": 20
 }

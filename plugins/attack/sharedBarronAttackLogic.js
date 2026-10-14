@@ -73,16 +73,102 @@ async function barronHit(type, kingdomID, options, maxLevel) {
         } while (true)
     }
 
-    function minDistanceToBase(ai) {
-        let minDist = Infinity
-        for (const base of myBases) {
-            const d = Math.pow(base.areaInfo.x - ai.x, 2) + Math.pow(base.areaInfo.y - ai.y, 2)
-            if (d < minDist) minDist = d
-        }
-        return minDist
+    // Senior Dev Architecture: Voronoi Territorial Partitioning
+    // Each robber baron belongs strictly to its closest base within a max farming radius (default: 28 tiles).
+    const MAX_FARMING_RADIUS = 28
+    const MAX_FARMING_RADIUS_SQ = MAX_FARMING_RADIUS * MAX_FARMING_RADIUS
+
+    const baseSectors = new Map() // base.id -> Array of { areaInfo, distSq, dist }
+    for (const base of myBases) {
+        baseSectors.set(base.id, [])
     }
 
-    var areas = Array.from(areaMap.values()).sort((a, b) => minDistanceToBase(a) - minDistanceToBase(b))
+    for (const ai of areaMap.values()) {
+        let closestBase = null
+        let minD = Infinity
+        for (const base of myBases) {
+            const d = Math.pow(base.areaInfo.x - ai.x, 2) + Math.pow(base.areaInfo.y - ai.y, 2)
+            if (d < minD) {
+                minD = d
+                closestBase = base
+            }
+        }
+
+        if (closestBase && minD <= MAX_FARMING_RADIUS_SQ) {
+            baseSectors.get(closestBase.id).push({
+                areaInfo: ai,
+                distSq: minD,
+                dist: Math.sqrt(minD)
+            })
+        }
+    }
+
+    // Sort each sector's barons strictly by distance ascending (closest first)
+    const allAssignedBarons = []
+    for (const base of myBases) {
+        const sector = baseSectors.get(base.id)
+        sector.sort((a, b) => a.distSq - b.distSq)
+        sector.forEach(item => allAssignedBarons.push(item.areaInfo))
+    }
+
+    // Fallback if no barons within radius (e.g. edge of map or isolated base)
+    var areas = allAssignedBarons.length > 0 ? allAssignedBarons : Array.from(areaMap.values())
+
+    function inspectBaseTroops(baseCastle) {
+        const dummyTroops = []
+        const attackerMeleeTroops = []
+        const attackerRangeTroops = []
+        const attackerShieldTools = []
+        const attackerWallTools = []
+
+        for (let i = 0; i < baseCastle.unitInventory.length; i++) {
+            const unit = baseCastle.unitInventory[i]
+            if (unit.amount <= 0)
+                continue
+
+            if (unit.unitInfo.toolCategory &&
+                unit.unitInfo.usageEventID == undefined &&
+                unit.unitInfo.allowedToAttack == undefined &&
+                unit.unitInfo.typ == 'Attack' &&
+                unit.unitInfo.amountPerWave == undefined) {
+                if (unit.unitInfo.wallBonus)
+                    attackerWallTools.push(unit)
+                else if (unit.unitInfo.defRangeBonus)
+                    attackerShieldTools.push(unit)
+            }
+            else if (unit.unitInfo.fightType == 0 &&
+                unit.unitInfo.beefSupply == undefined) {
+                if (options.foodTroopsOnly && unit.unitInfo.meadSupply)
+                    continue
+                if (!options.useDogs && unit.unitInfo.wodID == 277)
+                    continue
+                if (options.useDogs && unit.unitInfo.wodID != 277)
+                    continue
+
+                if (BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) || unit.unitInfo.group === "Keep") {
+                    dummyTroops.push(unit)
+                }
+
+                if (unit.unitInfo.role == "melee")
+                    attackerMeleeTroops.push(unit)
+                else if (unit.unitInfo.role == "ranged")
+                    attackerRangeTroops.push(unit)
+            }
+        }
+
+        let totalAttackTroops = 0
+        attackerRangeTroops.forEach(e => totalAttackTroops += e.amount)
+        attackerMeleeTroops.forEach(e => totalAttackTroops += e.amount)
+
+        return {
+            dummyTroops,
+            attackerMeleeTroops,
+            attackerRangeTroops,
+            attackerShieldTools,
+            attackerWallTools,
+            totalAttackTroops
+        }
+    }
 
     async function skipTarget(areaInfo) {
         while (areaInfo.extraData[2] > 0) {
@@ -124,124 +210,91 @@ async function barronHit(type, kingdomID, options, maxLevel) {
         const hasShieldMadiens = commander.getEffects(type).AttackSupportUnits
         try {
             const attackInfo = await waitToAttack(async () => {
-                let index = -1
                 const timeSinceEpoch = Date.now()
-                for (let i = 0; i < areas.length; i++) {
-                    const areaInfo = areas[i]
-                    const shouldUpgradeTower = options.upgradeTowers && getLevel(areaInfo.extraData[1], kingdomID) != maxLevel
-                    const skipsPerTower = 7200
+                let bestCandidate = null
+                let anyBaseHasTroops = false
 
-                    const coinSkips = recruitTroops ? Math.floor(resources.coins / (1000 / (20 * 5))) : 0
-                    const enoughSkips = haveEnoughSkips(skipsPerTower * movements.reduce((count, movement) =>
-                        (movement.targetAttack.type == type ? count++ : count, count), 0) - coinSkips) || (recruitTroops && resources.coins > 25000)
+                // Evaluate each base strictly on its own exclusive sector
+                for (const base of myBases) {
+                    const sector = baseSectors.get(base.id)
+                    if (!sector || sector.length === 0)
+                        continue
 
-                    if (enoughSkips && (options.useTimeSkips || shouldUpgradeTower)) {
-                        try {
-                            await skipTarget(areaInfo)
-                        }
-                        catch (e) {
-                            console.warn(e)
-                            continue
-                        }
+                    const troopData = inspectBaseTroops(base)
+                    if (troopData.totalAttackTroops >= 5) {
+                        anyBaseHasTroops = true
+                    } else {
+                        // Base has no troops right now: strictly wait for its troops, never steal another base's targets!
+                        continue
                     }
-                    else if (((areaInfo.timeSinceRequest + areaInfo.extraData[2] * 1000) - timeSinceEpoch) > 0)
-                        continue
-                    else if (movements.find(movement =>
-                        movement.kingdomID == kingdomID &&
-                        movement.targetAttack.x == areaInfo.x && movement.targetAttack.y == areaInfo.y))
-                        continue
 
-                    index = i
-                    break
-                }
-                if (index == -1)
-                    return
+                    // Find closest ready baron in this base's sector
+                    for (const item of sector) {
+                        const areaInfo = item.areaInfo
+                        const shouldUpgradeTower = options.upgradeTowers && getLevel(areaInfo.extraData[1], kingdomID) != maxLevel
+                        const skipsPerTower = 7200
 
-                const areaInfo = areas[index]
-                const level = getLevel(areaInfo.extraData[1], kingdomID)
-                const tactic = (isGreatEmpire && greatEmpireTactics) ? greatEmpireTactics[level] : null
-                let requiredTroops = 10
-                if (tactic && tactic.waves && tactic.waves[0]) {
-                    const w0 = tactic.waves[0]
-                    const req = (w0.left_troops.reduce((s, x) => s + x.count, 0) +
-                                 w0.front_troops.reduce((s, x) => s + x.count, 0) +
-                                 w0.right_troops.reduce((s, x) => s + x.count, 0))
-                    if (req > 0) requiredTroops = req
-                }
+                        const coinSkips = recruitTroops ? Math.floor(resources.coins / (1000 / (20 * 5))) : 0
+                        const enoughSkips = haveEnoughSkips(skipsPerTower * movements.reduce((count, movement) =>
+                            (movement.targetAttack.type == type ? count++ : count, count), 0) - coinSkips) || (recruitTroops && resources.coins > 25000)
 
-                // Pick closest base to target that has enough troops
-                const rankedBases = myBases.slice().sort((a, b) => {
-                    const dA = Math.pow(a.areaInfo.x - areaInfo.x, 2) + Math.pow(a.areaInfo.y - areaInfo.y, 2)
-                    const dB = Math.pow(b.areaInfo.x - areaInfo.x, 2) + Math.pow(b.areaInfo.y - areaInfo.y, 2)
-                    return dA - dB
-                })
-
-                let castle = null
-                let dummyTroops = []
-                let attackerMeleeTroops = []
-                let attackerRangeTroops = []
-                let attackerShieldTools = []
-                let attackerWallTools = []
-
-                for (const candidate of rankedBases) {
-                    const cDummy = []
-                    const cMelee = []
-                    const cRange = []
-                    const cShield = []
-                    const cWall = []
-
-                    for (let i = 0; i < candidate.unitInventory.length; i++) {
-                        const unit = candidate.unitInventory[i]
-                        if (unit.amount <= 0)
-                            continue
-
-                        if (unit.unitInfo.toolCategory &&
-                            unit.unitInfo.usageEventID == undefined &&
-                            unit.unitInfo.allowedToAttack == undefined &&
-                            unit.unitInfo.typ == 'Attack' &&
-                            unit.unitInfo.amountPerWave == undefined) {
-                            if (unit.unitInfo.wallBonus)
-                                cWall.push(unit)
-                            else if (unit.unitInfo.defRangeBonus)
-                                cShield.push(unit)
-                        }
-                        else if (unit.unitInfo.fightType == 0 &&
-                            unit.unitInfo.beefSupply == undefined) {
-                            if (options.foodTroopsOnly && unit.unitInfo.meadSupply)
-                                continue
-                            if (!options.useDogs && unit.unitInfo.wodID == 277)
-                                continue
-                            if (options.useDogs && unit.unitInfo.wodID != 277)
-                                continue
-
-                            if (BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) || unit.unitInfo.group === "Keep") {
-                                cDummy.push(unit)
+                        if (enoughSkips && (options.useTimeSkips || shouldUpgradeTower)) {
+                            try {
+                                await skipTarget(areaInfo)
                             }
-
-                            if (unit.unitInfo.role == "melee")
-                                cMelee.push(unit)
-                            else if (unit.unitInfo.role == "ranged")
-                                cRange.push(unit)
+                            catch (e) {
+                                console.warn(e)
+                                continue
+                            }
                         }
-                    }
+                        else if (((areaInfo.timeSinceRequest + areaInfo.extraData[2] * 1000) - timeSinceEpoch) > 0)
+                            continue
+                        else if (movements.find(movement =>
+                            movement.kingdomID == kingdomID &&
+                            movement.targetAttack.x == areaInfo.x && movement.targetAttack.y == areaInfo.y))
+                            continue
 
-                    let totalAvailable = 0
-                    cRange.forEach(e => totalAvailable += e.amount)
-                    cMelee.forEach(e => totalAvailable += e.amount)
+                        const level = getLevel(areaInfo.extraData[1], kingdomID)
+                        const tactic = (isGreatEmpire && greatEmpireTactics) ? greatEmpireTactics[level] : null
+                        let requiredTroops = 10
+                        if (tactic && tactic.waves && tactic.waves[0]) {
+                            const w0 = tactic.waves[0]
+                            const req = (w0.left_troops.reduce((s, x) => s + x.count, 0) +
+                                         w0.front_troops.reduce((s, x) => s + x.count, 0) +
+                                         w0.right_troops.reduce((s, x) => s + x.count, 0))
+                            if (req > 0) requiredTroops = req
+                        }
 
-                    if (totalAvailable >= requiredTroops) {
-                        castle = candidate
-                        dummyTroops = cDummy
-                        attackerMeleeTroops = cMelee
-                        attackerRangeTroops = cRange
-                        attackerShieldTools = cShield
-                        attackerWallTools = cWall
-                        break
+                        if (troopData.totalAttackTroops >= requiredTroops) {
+                            // Valid candidate for this base!
+                            if (!bestCandidate || item.distSq < bestCandidate.distSq) {
+                                bestCandidate = {
+                                    base,
+                                    areaInfo,
+                                    level,
+                                    tactic,
+                                    troopData,
+                                    distSq: item.distSq,
+                                    dist: item.dist
+                                }
+                            }
+                            // Sector is sorted closest-first, so this is the closest ready target for this base
+                            break
+                        }
                     }
                 }
 
-                if (!castle)
-                    throw "NO_MORE_TROOPS"
+                if (!bestCandidate) {
+                    if (!anyBaseHasTroops)
+                        throw "NO_MORE_TROOPS"
+                    return // All sector targets are on cooldown or currently have active movements
+                }
+
+                const castle = bestCandidate.base
+                const areaInfo = bestCandidate.areaInfo
+                const level = bestCandidate.level
+                const tactic = bestCandidate.tactic
+                const { dummyTroops, attackerMeleeTroops, attackerRangeTroops, attackerShieldTools, attackerWallTools } = bestCandidate.troopData
 
                 // Economic sorting: cheapest/weakest units first to protect elite event troops
                 const sortEconomic = (a, b) => {
@@ -402,7 +455,10 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 if (result != 0)
                     throw err[result]
 
-                return obj
+                const baseName = castle.areaInfo.name ? `${castle.areaInfo.name} (${castle.areaInfo.x}:${castle.areaInfo.y})` : `Base (${castle.areaInfo.x}:${castle.areaInfo.y})`
+                const targetDistance = Math.round(Math.sqrt(Math.pow(castle.areaInfo.x - areaInfo.x, 2) + Math.pow(castle.areaInfo.y - areaInfo.y, 2)))
+
+                return { obj, baseName, targetDistance }
             })
 
             if (!attackInfo) {
@@ -410,7 +466,8 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 return false
             }
             
-            console.info("hittingTargetAttack", KingdomID[kingdomID], ' ', 'C', attackInfo.AAM.UM.L.VIS + 1, ' ', attackInfo.AAM.M.TA[1], ':', attackInfo.AAM.M.TA[2], " ", pretty(Math.round(1000000000 * Math.abs(Math.max(0, attackInfo.AAM.M.TT - attackInfo.AAM.M.PT))), 's'), "tillImpactAttack")
+            const { obj, baseName, targetDistance } = attackInfo
+            console.info("hittingTargetAttack", KingdomID[kingdomID], ' ', 'C', obj.AAM.UM.L.VIS + 1, ' ', obj.AAM.M.TA[1], ':', obj.AAM.M.TA[2], "from", baseName, `[${targetDistance} tiles]`, pretty(Math.round(1000000000 * Math.abs(Math.max(0, obj.AAM.M.TT - obj.AAM.M.PT))), 's'), "tillImpactAttack")
             return true
         } catch (e) {
             freeCommander(commander.lordID)
