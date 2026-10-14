@@ -1,0 +1,5404 @@
+{
+  "1": {
+    "level": 1,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 3,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "2": {
+    "level": 2,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "3": {
+    "level": 3,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "4": {
+    "level": 4,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Mm"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "5": {
+    "level": 5,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 4,
+            "role": "ranged",
+            "name": "Cb"
+          },
+          {
+            "count": 7,
+            "role": "ranged",
+            "name": "Cb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "6": {
+    "level": 6,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 3,
+            "role": "melee",
+            "name": "Sm"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 3,
+            "role": "melee",
+            "name": "Sm"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "7": {
+    "level": 7,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 19,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 2,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "8": {
+    "level": 8,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 9,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 23,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "9": {
+    "level": 9,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 6,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 6,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "10": {
+    "level": 10,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 12,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 12,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "11": {
+    "level": 11,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 13,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 13,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "12": {
+    "level": 12,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 14,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 40,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "ladd"
+          },
+          {
+            "count": 4,
+            "type": "gate",
+            "name": "ram"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 14,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "13": {
+    "level": 13,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 15,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 8,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 15,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 9,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "14": {
+    "level": 14,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 16,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 7,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 16,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 7,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "15": {
+    "level": 15,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 17,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 9,
+            "type": "wall",
+            "name": "ladders"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 22,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "16": {
+    "level": 16,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 9,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 9,
+            "role": "melee",
+            "name": "Ths"
+          },
+          {
+            "count": 18,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 9,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 18,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 18,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "17": {
+    "level": 17,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 14,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 5,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 25,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 25,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 4,
+            "type": "gate",
+            "name": "Ram"
+          },
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "18": {
+    "level": 18,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 20,
+            "role": "melee",
+            "name": "Ths"
+          },
+          {
+            "count": 10,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 58,
+            "role": "melee",
+            "name": "Ths"
+          },
+          {
+            "count": 58,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "19": {
+    "level": 19,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 21,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 21,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "20": {
+    "level": 20,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 15,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 7,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 8,
+            "type": "shield",
+            "name": "Mlt"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 22,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "shield",
+            "name": "Mlt"
+          }
+        ]
+      }
+    ]
+  },
+  "21": {
+    "level": 21,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 67,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "name": "Sp"
+          },
+          {
+            "count": 23,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "22": {
+    "level": 22,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 72,
+            "role": "ranged",
+            "name": "HC"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 72,
+            "role": "ranged",
+            "name": "HC"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "23": {
+    "level": 23,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 50,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 50,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "24": {
+    "level": 24,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 78,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 78,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "25": {
+    "level": 25,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 81,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 81,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "26": {
+    "level": 26,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 56,
+            "role": "melee",
+            "name": "TH"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 166,
+            "role": "melee",
+            "name": "TH"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 56,
+            "role": "melee",
+            "name": "TH"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ]
+      }
+    ]
+  },
+  "27": {
+    "level": 27,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "1 Cb"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "1 Cb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "name": "cb"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 29,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 78,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          },
+          {
+            "count": 2,
+            "type": "gate",
+            "name": "Rams"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "28": {
+    "level": 28,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "1 Cb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 30,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 88,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "Ladd"
+          },
+          {
+            "count": 4,
+            "type": "gate",
+            "name": "Rams"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 30,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 88,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 30,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "29": {
+    "level": 29,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 91,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 3,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 5,
+            "type": "gate",
+            "name": "ram"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 31,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 3,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 16,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 38,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "30": {
+    "level": 30,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 94,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 32,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 10,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 94,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 44,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "31": {
+    "level": 31,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 33,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 93,
+            "role": "melee",
+            "name": "Ths"
+          },
+          {
+            "count": 4,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 3,
+            "type": "gate",
+            "name": "ram"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 33,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 18,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "32": {
+    "level": 32,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 75,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 19,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 93,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 34,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 96,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 34,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "33": {
+    "level": 33,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 69,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 35,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 58,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "34": {
+    "level": 34,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 36,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 10,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 36,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 10,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [
+          {
+            "count": 7,
+            "role": "melee",
+            "name": "Ths"
+          },
+          {
+            "count": 29,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 36,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "35": {
+    "level": 35,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 37,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 37,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [
+          {
+            "count": 37,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 37,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 37,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 37,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "36": {
+    "level": 36,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 38,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 107,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 72,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 85,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "37": {
+    "level": 37,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 108,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 39,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 16,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 91,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 55,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "38": {
+    "level": 38,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 37,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 77,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 40,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 3,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 17,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "39": {
+    "level": 39,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 41,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 7,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 2,
+            "role": "melee",
+            "name": "Ths"
+          },
+          {
+            "count": 119,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 6,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 7,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 41,
+            "role": "melee",
+            "name": "Ths"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 7,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 17,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "40": {
+    "level": 40,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 90,
+            "role": "ranged",
+            "name": "Hc"
+          },
+          {
+            "count": 34,
+            "role": "ranged",
+            "name": "Vcb"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 5,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 24,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 124,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 42,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 19,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "41": {
+    "level": 41,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 43,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 127,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 24,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "42": {
+    "level": 42,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 130,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 24,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "43": {
+    "level": 43,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 45,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 133,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 6,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 24,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 45,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 133,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "44": {
+    "level": 44,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 136,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 6,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 46,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 3,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 136,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "45": {
+    "level": 45,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 47,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 139,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 6,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 24,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 47,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 139,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "46": {
+    "level": 46,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 142,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 116,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 48,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [
+          {
+            "count": 48,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "47": {
+    "level": 47,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 49,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 5,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 145,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 6,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 5,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 49,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 8,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 145,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "48": {
+    "level": 48,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 50,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 148,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 6,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 24,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 148,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "49": {
+    "level": 49,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 51,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 51,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 151,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 145,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "50": {
+    "level": 50,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 154,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "51": {
+    "level": 51,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 15,
+            "type": "shield",
+            "name": "man"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 138,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "52": {
+    "level": 52,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 146,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "53": {
+    "level": 53,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 62,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "54": {
+    "level": 54,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 84,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "55": {
+    "level": 55,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 100,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "56": {
+    "level": 56,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 24,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "57": {
+    "level": 57,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 9,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 138,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "58": {
+    "level": 58,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "59": {
+    "level": 59,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          },
+          {
+            "count": 5,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "60": {
+    "level": 60,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 9,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 20,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 6,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 8,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 136,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "61": {
+    "level": 61,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 1,
+            "role": "dummy",
+            "raw": "martyr"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [
+          {
+            "count": 2,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "62": {
+    "level": 62,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 7,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 21,
+            "type": "gate",
+            "name": "ram"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 9,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "63": {
+    "level": 63,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 2,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 122,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "64": {
+    "level": 64,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 2,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 7,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 32,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 114,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "65": {
+    "level": 65,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 33,
+            "role": "melee",
+            "name": "Sp"
+          },
+          {
+            "count": 38,
+            "role": "melee",
+            "name": "Sm"
+          },
+          {
+            "count": 42,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 1,
+            "type": "wall",
+            "name": "St"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 28,
+            "role": "melee",
+            "name": "Sp"
+          },
+          {
+            "count": 35,
+            "role": "melee",
+            "name": "Sm"
+          },
+          {
+            "count": 37,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 22,
+            "role": "melee",
+            "name": "Sp"
+          },
+          {
+            "count": 17,
+            "role": "melee",
+            "name": "Sm"
+          },
+          {
+            "count": 8,
+            "role": "ranged",
+            "name": "Hc"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "66": {
+    "level": 66,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [
+          {
+            "count": 32,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": [
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "67": {
+    "level": 67,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 2,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 127,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "68": {
+    "level": 68,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 30,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 96,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "69": {
+    "level": 69,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 7,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 52,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 32,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 156,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 127,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "70": {
+    "level": 70,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 28,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 32,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 42,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "71": {
+    "level": 71,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 25,
+            "role": "melee",
+            "name": "Spear"
+          },
+          {
+            "count": 167,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 8,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 10,
+            "type": "gate",
+            "name": "ram"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Spear"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 13,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 31,
+            "role": "melee",
+            "name": "Imperial"
+          },
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Beserkers"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "right_tools": []
+      },
+      {
+        "left_troops": [
+          {
+            "count": 56,
+            "role": "melee",
+            "name": "Beserkers"
+          },
+          {
+            "count": 39,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 95,
+            "role": "melee",
+            "name": "Imperial"
+          }
+        ],
+        "right_tools": []
+      }
+    ]
+  },
+  "72": {
+    "level": 72,
+    "waves": [
+      {
+        "left_troops": [],
+        "left_tools": [
+          {
+            "count": 30,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [],
+        "front_tools": [
+          {
+            "count": 30,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [],
+        "right_tools": [
+          {
+            "count": 35,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "73": {
+    "level": 73,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 5,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 57,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "74": {
+    "level": 74,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 30,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 43,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "75": {
+    "level": 75,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 5,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 51,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "76": {
+    "level": 76,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 5,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 66,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "77": {
+    "level": 77,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Melee"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Melee"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Melee"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 47,
+            "role": "melee",
+            "name": "Melee"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "78": {
+    "level": 78,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 48,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "79": {
+    "level": 79,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 2,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 20,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 35,
+            "role": "melee",
+            "name": "Vmm"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "80": {
+    "level": 80,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 30,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 64,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 192,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 62,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  },
+  "81": {
+    "level": 81,
+    "waves": [
+      {
+        "left_troops": [
+          {
+            "count": 74,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "left_tools": [
+          {
+            "count": 31,
+            "type": "shield",
+            "name": "man"
+          },
+          {
+            "count": 4,
+            "type": "wall",
+            "name": "lad"
+          }
+        ],
+        "front_troops": [
+          {
+            "count": 202,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [
+          {
+            "count": 20,
+            "type": "gate",
+            "name": "ram"
+          },
+          {
+            "count": 5,
+            "type": "wall",
+            "name": "lad"
+          },
+          {
+            "count": 25,
+            "type": "shield",
+            "name": "man"
+          }
+        ],
+        "right_troops": [
+          {
+            "count": 74,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "right_tools": [
+          {
+            "count": 35,
+            "type": "shield",
+            "name": "man"
+          },
+          {
+            "count": 5,
+            "type": "wall",
+            "name": "lad"
+          }
+        ]
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 202,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [
+          {
+            "count": 117,
+            "role": "ranged",
+            "name": "Vhc"
+          }
+        ],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      },
+      {
+        "left_troops": [],
+        "left_tools": [],
+        "front_troops": [],
+        "front_tools": [],
+        "right_troops": [],
+        "right_tools": []
+      }
+    ]
+  }
+}

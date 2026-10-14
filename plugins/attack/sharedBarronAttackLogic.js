@@ -26,26 +26,63 @@ catch (e) {
     console.debug(e)
 }
 
+let greatEmpireTactics = null
+try {
+    greatEmpireTactics = require("./barron_tactics_compact.json")
+} catch (e) {
+    console.debug("Could not load barron_tactics_compact.json", e)
+}
+
+const BASIC_DUMMY_IDS = [601, 602, 603, 607, 608, 652, 746]
+
 async function barronHit(type, kingdomID, options, maxLevel) {
     const getLevel = victorys =>
         Math.floor(1.9 * Math.pow(victorys, .555)) + ([1, 35, 20, 45][kingdomID] ?? 0)
 
-    const castle = castles.find(e => e.kingdomID == kingdomID &&
-        [AreaType.externalKingdom, AreaType.mainCastle].includes(e.areaInfo.type))
+    const isGreatEmpire = kingdomID === KingdomID.greatEmpire
+    const validBaseTypes = isGreatEmpire
+        ? [AreaType.mainCastle, AreaType.outpost]
+        : [AreaType.externalKingdom, AreaType.mainCastle]
 
-    do {
-        try {
-            var areas = (await ClientCommands.getAreaInfo(kingdomID,
-                castle.areaInfo.x - 50, castle.areaInfo.y - 50,
-                castle.areaInfo.x + 50, castle.areaInfo.y + 50))
-                .areaInfo.filter(ai => ai.type == type).sort((a, b) =>
-                    (Math.pow(castle.areaInfo.x - a.x, 2) + Math.pow(castle.areaInfo.y - a.y, 2)) -
-                    (Math.pow(castle.areaInfo.x - b.x, 2) + Math.pow(castle.areaInfo.y - b.y, 2)))
-            break
-        } catch (e) {
-            console.warn(e)
+    const myBases = castles.filter(e => e.kingdomID == kingdomID &&
+        validBaseTypes.includes(e.areaInfo.type))
+
+    if (myBases.length === 0) {
+        const fallback = castles.find(e => e.kingdomID == kingdomID)
+        if (fallback) myBases.push(fallback)
+    }
+
+    const areaMap = new Map()
+    for (const base of myBases) {
+        do {
+            try {
+                const resp = await ClientCommands.getAreaInfo(kingdomID,
+                    base.areaInfo.x - 50, base.areaInfo.y - 50,
+                    base.areaInfo.x + 50, base.areaInfo.y + 50)
+                for (const ai of resp.areaInfo) {
+                    if (ai.type == type) {
+                        const key = `${ai.x}_${ai.y}`
+                        if (!areaMap.has(key)) areaMap.set(key, ai)
+                    }
+                }
+                break
+            } catch (e) {
+                console.warn(e)
+                break
+            }
+        } while (true)
+    }
+
+    function minDistanceToBase(ai) {
+        let minDist = Infinity
+        for (const base of myBases) {
+            const d = Math.pow(base.areaInfo.x - ai.x, 2) + Math.pow(base.areaInfo.y - ai.y, 2)
+            if (d < minDist) minDist = d
         }
-    } while (true)
+        return minDist
+    }
+
+    var areas = Array.from(areaMap.values()).sort((a, b) => minDistanceToBase(a) - minDistanceToBase(b))
 
     async function skipTarget(areaInfo) {
         while (areaInfo.extraData[2] > 0) {
@@ -122,49 +159,100 @@ async function barronHit(type, kingdomID, options, maxLevel) {
 
                 const areaInfo = areas[index]
                 const level = getLevel(areaInfo.extraData[1], kingdomID)
+                const tactic = (isGreatEmpire && greatEmpireTactics) ? greatEmpireTactics[level] : null
+                let requiredTroops = 10
+                if (tactic && tactic.waves && tactic.waves[0]) {
+                    const w0 = tactic.waves[0]
+                    const req = (w0.left_troops.reduce((s, x) => s + x.count, 0) +
+                                 w0.front_troops.reduce((s, x) => s + x.count, 0) +
+                                 w0.right_troops.reduce((s, x) => s + x.count, 0))
+                    if (req > 0) requiredTroops = req
+                }
 
-                const attackerMeleeTroops = []
-                const attackerRangeTroops = []
-                const attackerShieldTools = []
-                const attackerWallTools = []
+                // Pick closest base to target that has enough troops
+                const rankedBases = myBases.slice().sort((a, b) => {
+                    const dA = Math.pow(a.areaInfo.x - areaInfo.x, 2) + Math.pow(a.areaInfo.y - areaInfo.y, 2)
+                    const dB = Math.pow(b.areaInfo.x - areaInfo.x, 2) + Math.pow(b.areaInfo.y - areaInfo.y, 2)
+                    return dA - dB
+                })
 
-                for (let i = 0; i < castle.unitInventory.length; i++) {
-                    const unit = castle.unitInventory[i]
-                    if (unit.amount <= 0)
-                        continue
+                let castle = null
+                let dummyTroops = []
+                let attackerMeleeTroops = []
+                let attackerRangeTroops = []
+                let attackerShieldTools = []
+                let attackerWallTools = []
 
-                    if (unit.unitInfo.toolCategory &&
-                        unit.unitInfo.usageEventID == undefined &&
-                        unit.unitInfo.allowedToAttack == undefined &&
-                        unit.unitInfo.typ == 'Attack' &&
-                        unit.unitInfo.amountPerWave == undefined) {
-                        if (unit.unitInfo.wallBonus)
-                            attackerWallTools.push(unit)
-                        else if (unit.unitInfo.defRangeBonus)
-                            attackerShieldTools.push(unit)
+                for (const candidate of rankedBases) {
+                    const cDummy = []
+                    const cMelee = []
+                    const cRange = []
+                    const cShield = []
+                    const cWall = []
+
+                    for (let i = 0; i < candidate.unitInventory.length; i++) {
+                        const unit = candidate.unitInventory[i]
+                        if (unit.amount <= 0)
+                            continue
+
+                        if (unit.unitInfo.toolCategory &&
+                            unit.unitInfo.usageEventID == undefined &&
+                            unit.unitInfo.allowedToAttack == undefined &&
+                            unit.unitInfo.typ == 'Attack' &&
+                            unit.unitInfo.amountPerWave == undefined) {
+                            if (unit.unitInfo.wallBonus)
+                                cWall.push(unit)
+                            else if (unit.unitInfo.defRangeBonus)
+                                cShield.push(unit)
+                        }
+                        else if (unit.unitInfo.fightType == 0 &&
+                            unit.unitInfo.beefSupply == undefined) {
+                            if (options.foodTroopsOnly && unit.unitInfo.meadSupply)
+                                continue
+                            if (!options.useDogs && unit.unitInfo.wodID == 277)
+                                continue
+                            if (options.useDogs && unit.unitInfo.wodID != 277)
+                                continue
+
+                            if (BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) || unit.unitInfo.group === "Keep") {
+                                cDummy.push(unit)
+                            }
+
+                            if (unit.unitInfo.role == "melee")
+                                cMelee.push(unit)
+                            else if (unit.unitInfo.role == "ranged")
+                                cRange.push(unit)
+                        }
                     }
-                    else if (unit.unitInfo.fightType == 0 &&
-                        unit.unitInfo.beefSupply == undefined) {
-                        if(options.foodTroopsOnly && unit.unitInfo.meadSupply)
-                            continue
-                        if (!options.useDogs && unit.unitInfo.wodID == 277)
-                            continue
-                        if (options.useDogs && unit.unitInfo.wodID != 277)
-                            continue
-                        if (unit.unitInfo.role == "melee")
-                            attackerMeleeTroops.push(unit)
-                        else if (unit.unitInfo.role == "ranged")
-                            attackerRangeTroops.push(unit)
+
+                    let totalAvailable = 0
+                    cRange.forEach(e => totalAvailable += e.amount)
+                    cMelee.forEach(e => totalAvailable += e.amount)
+
+                    if (totalAvailable >= requiredTroops) {
+                        castle = candidate
+                        dummyTroops = cDummy
+                        attackerMeleeTroops = cMelee
+                        attackerRangeTroops = cRange
+                        attackerShieldTools = cShield
+                        attackerWallTools = cWall
+                        break
                     }
                 }
 
-                let allTroopCount = 0
-
-                attackerRangeTroops.forEach(e => allTroopCount += e.amount)
-                attackerMeleeTroops.forEach(e => allTroopCount += e.amount)
-
-                if (allTroopCount < minTroopCount)
+                if (!castle)
                     throw "NO_MORE_TROOPS"
+
+                // Economic sorting: cheapest/weakest units first to protect elite event troops
+                const sortEconomic = (a, b) => {
+                    const aIsElite = (a.unitInfo.group !== "Barracks" || (a.unitInfo.costC2 && a.unitInfo.costC2 > 0)) ? 1 : 0
+                    const bIsElite = (b.unitInfo.group !== "Barracks" || (b.unitInfo.costC2 && b.unitInfo.costC2 > 0)) ? 1 : 0
+                    if (aIsElite !== bIsElite) return aIsElite - bIsElite
+
+                    const aPower = Number(a.unitInfo.meleeAttack || a.unitInfo.rangeAttack || 0)
+                    const bPower = Number(b.unitInfo.meleeAttack || b.unitInfo.rangeAttack || 0)
+                    return aPower - bPower
+                }
 
                 attackerWallTools.sort((a, b) =>
                     Number(a.unitInfo.wallBonus) - Number(b.unitInfo.wallBonus))
@@ -172,71 +260,121 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 attackerShieldTools.sort((a, b) =>
                     Number(a.unitInfo.defRangeBonus) - Number(b.unitInfo.defRangeBonus))
 
+                attackerMeleeTroops.sort(sortEconomic)
+                attackerRangeTroops.sort(sortEconomic)
+                dummyTroops.sort(sortEconomic)
+
                 const autoConfigure = !(options.attackLeft || options.attackRight || options.attackMiddle)
                 const commanderStats = commander.getEffects()
-                const attackInfo = getAttackInfo(kingdomID, castle, areaInfo, commander, level, parseInt(options.attackWaves), options, commanderStats.additionalWaves)
-                const maxTroopFront = getAmountSoldiersFront(level, commanderStats.attackUnitAmountFront)
-                const maxTroopFlank = getAmountSoldiersFlank(level, commanderStats.attackUnitAmountFlank)
-                const maxToolsFlank = options.useShields ? getTotalAmountToolsFlank(level, 0) : 10
+                const waveCount = (tactic && tactic.waves && tactic.waves.length > 0)
+                    ? Math.max(tactic.waves.length, parseInt(options.attackWaves || 2))
+                    : parseInt(options.attackWaves || 2)
+                const attackInfo = getAttackInfo(kingdomID, castle, areaInfo, commander, level, waveCount, options, commanderStats.additionalWaves)
 
-                attackInfo.A.forEach((wave, index) => {
-                    let maxTroops = maxTroopFlank
+                if (tactic && tactic.waves && tactic.waves.length > 0) {
+                    // TÁCTICA QUIRÚRGICA: Wiki Presets
+                    tactic.waves.forEach((tWave, wIdx) => {
+                        const wave = attackInfo.A[wIdx]
+                        if (!wave) return
 
-                    if (index == 0 && options.useWallTools) {
-                        const desiredToolCount = 10
-                        let maxTools = maxToolsFlank
-                        if (autoConfigure ? true : options.attackLeft) {
-                            wave.L.T.forEach((unitSlot, i) =>
-                                maxTools -= assignUnit(unitSlot, i == 0 ?
-                                    attackerWallTools : attackerShieldTools, Math.min(maxTools, desiredToolCount)))
+                        const flanks = [
+                            { flank: wave.L, troops: tWave.left_troops, tools: tWave.left_tools },
+                            { flank: wave.M, troops: tWave.front_troops, tools: tWave.front_tools },
+                            { flank: wave.R, troops: tWave.right_troops, tools: tWave.right_tools }
+                        ]
 
-                            wave.L.U.forEach(unitSlot =>
-                                maxTroops -= assignUnit(unitSlot, attackerRangeTroops.length <= 0 ?
-                                    attackerMeleeTroops : attackerRangeTroops, maxTroops))
+                        flanks.forEach(({ flank, troops, tools }) => {
+                            if (tools && tools.length > 0 && flank.T) {
+                                tools.forEach((tReq, slotIdx) => {
+                                    const toolPool = (tReq.type === "shield") ? attackerShieldTools : attackerWallTools
+                                    if (flank.T[slotIdx]) {
+                                        assignUnit(flank.T[slotIdx], toolPool, tReq.count)
+                                    }
+                                })
+                            }
+
+                            if (troops && troops.length > 0 && flank.U) {
+                                troops.forEach((uReq, slotIdx) => {
+                                    let pool = attackerMeleeTroops
+                                    if (uReq.role === "dummy") {
+                                        pool = dummyTroops.length > 0 ? dummyTroops : attackerMeleeTroops
+                                    } else if (uReq.role === "ranged") {
+                                        pool = attackerRangeTroops.length > 0 ? attackerRangeTroops : attackerMeleeTroops
+                                    } else if (uReq.role === "melee") {
+                                        pool = attackerMeleeTroops.length > 0 ? attackerMeleeTroops : attackerRangeTroops
+                                    }
+
+                                    if (flank.U[slotIdx]) {
+                                        assignUnit(flank.U[slotIdx], pool, uReq.count)
+                                    }
+                                })
+                            }
+                        })
+                    })
+                } else {
+                    const maxTroopFront = getAmountSoldiersFront(level, commanderStats.attackUnitAmountFront)
+                    const maxTroopFlank = getAmountSoldiersFlank(level, commanderStats.attackUnitAmountFlank)
+                    const maxToolsFlank = options.useShields ? getTotalAmountToolsFlank(level, 0) : 10
+
+                    attackInfo.A.forEach((wave, index) => {
+                        let maxTroops = maxTroopFlank
+
+                        if (index == 0 && options.useWallTools) {
+                            const desiredToolCount = 10
+                            let maxTools = maxToolsFlank
+                            if (autoConfigure ? true : options.attackLeft) {
+                                wave.L.T.forEach((unitSlot, i) =>
+                                    maxTools -= assignUnit(unitSlot, i == 0 ?
+                                        attackerWallTools : attackerShieldTools, Math.min(maxTools, desiredToolCount)))
+
+                                wave.L.U.forEach(unitSlot =>
+                                    maxTroops -= assignUnit(unitSlot, attackerRangeTroops.length <= 0 ?
+                                        attackerMeleeTroops : attackerRangeTroops, maxTroops))
+                            }
+                            maxTools = maxToolsFlank
+                            if (options.attackRight) {
+                                wave.R.T.forEach((unitSlot, i) =>
+                                    maxTools -= assignUnit(unitSlot, i == 0 ?
+                                        attackerWallTools : attackerShieldTools, Math.min(maxTools, desiredToolCount)))
+
+                                maxTroops = maxTroopFlank
+                                wave.R.U.forEach(unitSlot =>
+                                    maxTroops -= assignUnit(unitSlot, attackerRangeTroops.length <= 0 ?
+                                        attackerMeleeTroops : attackerRangeTroops, maxTroops))
+                            }
+                            maxTools = maxToolsFlank
+                            if (options.attackMiddle) {
+                                wave.M.T.forEach((unitSlot, i) =>
+                                    maxTools -= assignUnit(unitSlot, i == 0 ?
+                                        attackerWallTools : attackerShieldTools, Math.min(maxTools, desiredToolCount)))
+
+                                maxTroops = maxTroopFront
+                                wave.M.U.forEach(unitSlot =>
+                                    maxTroops -= assignUnit(unitSlot, attackerRangeTroops.length <= 0 ?
+                                        attackerMeleeTroops : attackerRangeTroops, maxTroops))
+                            }
+                            return
                         }
-                        maxTools = maxToolsFlank
-                        if (options.attackRight) {
-                            wave.R.T.forEach((unitSlot, i) =>
-                                maxTools -= assignUnit(unitSlot, i == 0 ?
-                                    attackerWallTools : attackerShieldTools, Math.min(maxTools, desiredToolCount)))
 
+                        if (autoConfigure ? true : options.attackLeft) {
+                            wave.L.U.forEach(unitSlot =>
+                                maxTroops -= assignUnit(unitSlot, attackerMeleeTroops.length <= 0 ?
+                                    attackerRangeTroops : attackerMeleeTroops, maxTroops))
+                        }
+                        if (options.attackRight) {
                             maxTroops = maxTroopFlank
                             wave.R.U.forEach(unitSlot =>
-                                maxTroops -= assignUnit(unitSlot, attackerRangeTroops.length <= 0 ?
-                                    attackerMeleeTroops : attackerRangeTroops, maxTroops))
+                                maxTroops -= assignUnit(unitSlot, attackerMeleeTroops.length <= 0 ?
+                                    attackerRangeTroops : attackerMeleeTroops, maxTroops))
                         }
-                        maxTools = maxToolsFlank
                         if (options.attackMiddle) {
-                            wave.M.T.forEach((unitSlot, i) =>
-                                maxTools -= assignUnit(unitSlot, i == 0 ?
-                                    attackerWallTools : attackerShieldTools, Math.min(maxTools, desiredToolCount)))
-
                             maxTroops = maxTroopFront
                             wave.M.U.forEach(unitSlot =>
-                                maxTroops -= assignUnit(unitSlot, attackerRangeTroops.length <= 0 ?
-                                    attackerMeleeTroops : attackerRangeTroops, maxTroops))
+                                maxTroops -= assignUnit(unitSlot, attackerMeleeTroops.length <= 0 ?
+                                    attackerRangeTroops : attackerMeleeTroops, maxTroops))
                         }
-                        return
-                    }
-
-                    if (autoConfigure ? true : options.attackLeft) {
-                        wave.L.U.forEach(unitSlot =>
-                            maxTroops -= assignUnit(unitSlot, attackerMeleeTroops.length <= 0 ?
-                                attackerRangeTroops : attackerMeleeTroops, maxTroops))
-                    }
-                    if (options.attackRight) {
-                        maxTroops = maxTroopFlank
-                        wave.R.U.forEach(unitSlot =>
-                            maxTroops -= assignUnit(unitSlot, attackerMeleeTroops.length <= 0 ?
-                                attackerRangeTroops : attackerMeleeTroops, maxTroops))
-                    }
-                    if (options.attackMiddle) {
-                        maxTroops = maxTroopFront
-                        wave.M.U.forEach(unitSlot =>
-                            maxTroops -= assignUnit(unitSlot, attackerMeleeTroops.length <= 0 ?
-                                attackerRangeTroops : attackerMeleeTroops, maxTroops))
-                    }
-                })
+                    })
+                }
 
                 if (autoConfigure ? (hasShieldMadiens ? false : true) : options.attackCourtyard) {
                     let maxTroops = getMaxUnitsInReinforcementWave(playerInfo.level, level) + Number(0 | commanderStats.attackUnitAmountReinforcementBonus)
@@ -280,21 +418,32 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 case "NO_MORE_TROOPS":
                     try {
                         if (botConfig.externalEvent && kingdomID == KingdomID.greatEmpire && recruitTroops) {
-                            await recruitTroops(castle)
+                            const recruitBase = myBases.find(b => b.areaInfo.type == AreaType.mainCastle) || myBases[0]
+                            await recruitTroops(recruitBase)
                             return true
                         }
                     }
                     catch (e) {
                         console.debug(e)
                     }
-                    console.log(`[${KingdomID[kingdomID]}] Waiting for more troops`)
-                    await new Promise(resolve => movementEvents.on("return", function self(/** @type {import("../../protocols.js").ClassTypes.Movement} */ movement) {
-                        if (movement.kingdomID != kingdomID || movement.targetAttack.extraData[0] != castle.id)
-                            return
+                    console.log(`[${KingdomID[kingdomID]}] Waiting for more troops in any base`)
+                    const baseIds = myBases.map(b => b.id)
+                    await new Promise(resolve => {
+                        const timeout = setTimeout(() => {
+                            movementEvents.off("return", onReturn)
+                            resolve()
+                        }, 60000).unref()
 
-                        movementEvents.off("return", self)
-                        resolve()
-                    }))
+                        function onReturn(/** @type {import("../../protocols.js").ClassTypes.Movement} */ movement) {
+                            if (movement.kingdomID != kingdomID || !baseIds.includes(movement.targetAttack.extraData[0]))
+                                return
+
+                            clearTimeout(timeout)
+                            movementEvents.off("return", onReturn)
+                            resolve()
+                        }
+                        movementEvents.on("return", onReturn)
+                    })
                     return true
                 case "LORD_IS_USED":
                     useCommander(commander.lordID)
