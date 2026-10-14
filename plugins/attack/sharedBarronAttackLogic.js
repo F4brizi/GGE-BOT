@@ -35,12 +35,14 @@ try {
 
 const BASIC_DUMMY_IDS = [601, 602, 603, 607, 608, 652, 746]
 
-// Precomputed table of min victories per level for Great Empire (kingdomID = 0)
-const minVictoriesTable = []
+// Precomputed table of victory ranges [minV, maxV] per level for Great Empire (kingdomID = 0)
+const levelVictoryRanges = {}
 for (let v = 0; v <= 3000; v++) {
     const lvl = Math.floor(1.9 * Math.pow(v, 0.555)) + 1
-    if (minVictoriesTable[lvl] === undefined) {
-        minVictoriesTable[lvl] = v
+    if (!levelVictoryRanges[lvl]) {
+        levelVictoryRanges[lvl] = { minV: v, maxV: v }
+    } else {
+        levelVictoryRanges[lvl].maxV = v
     }
 }
 
@@ -53,8 +55,16 @@ function resolveBarronTactic(areaInfo, kingdomID) {
         return { level, tactic: null, variantKey: String(level), subIdx: 1, victories }
     }
 
-    const minV = minVictoriesTable[level] ?? victories
-    const subIdx = Math.max(1, victories - minV + 1)
+    const range = levelVictoryRanges[level]
+    // The community/wiki presets count DOWN remaining victories to next level:
+    // e.g. Level 7 has 3 victories (v=8, 9, 10).
+    // v=8 -> 10 - 8 + 1 = 3 -> Variant 7.3 ("Level 7.3 Victory to Level 8")
+    // v=9 -> 10 - 9 + 1 = 2 -> Variant 7.2 ("Level 7.2 Victory to Level 8")
+    // v=10 -> 10 - 10 + 1 = 1 -> Variant 7.1 ("Level 7.1 Victory to Level 8")
+    let subIdx = 1
+    if (range) {
+        subIdx = Math.max(1, range.maxV - victories + 1)
+    }
     const variantKey = `${level}.${subIdx}`
 
     const tactic = greatEmpireTactics[variantKey] || greatEmpireTactics[String(level)] || null
@@ -554,7 +564,8 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                     })
                 }
 
-                if (autoConfigure ? (hasShieldMadiens ? false : true) : options.attackCourtyard) {
+                const shouldAttackCourtyard = Boolean(options.attackCourtyard)
+                if (shouldAttackCourtyard && (!hasShieldMadiens)) {
                     let maxTroops = getMaxUnitsInReinforcementWave(playerInfo.level, level) + Number(0 | commanderStats.attackUnitAmountReinforcementBonus)
                     attackInfo.RW.forEach((unitSlot, i) => {
                         let attacker = i & 1 ?
