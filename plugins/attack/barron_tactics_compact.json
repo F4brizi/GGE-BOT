@@ -207,11 +207,6 @@
             "count": 4,
             "role": "ranged",
             "name": "Cb"
-          },
-          {
-            "count": 7,
-            "role": "ranged",
-            "name": "Cb"
           }
         ],
         "front_tools": [],
@@ -258,11 +253,6 @@
             "count": 4,
             "role": "ranged",
             "name": "Cb"
-          },
-          {
-            "count": 7,
-            "role": "ranged",
-            "name": "Cb"
           }
         ],
         "front_tools": [],
@@ -305,11 +295,6 @@
         "left_troops": [
           {
             "count": 3,
-            "role": "ranged",
-            "name": "Cb"
-          },
-          {
-            "count": 4,
             "role": "ranged",
             "name": "Cb"
           }
@@ -945,11 +930,6 @@
             "count": 1,
             "role": "dummy",
             "name": "Sp"
-          },
-          {
-            "count": 13,
-            "role": "melee",
-            "name": "Ths"
           }
         ],
         "left_tools": [
@@ -964,16 +944,6 @@
             "count": 1,
             "role": "dummy",
             "name": "Sp"
-          },
-          {
-            "count": 13,
-            "role": "melee",
-            "name": "Ths"
-          },
-          {
-            "count": 24,
-            "role": "ranged",
-            "name": "Hc"
           }
         ],
         "front_tools": [
@@ -993,11 +963,6 @@
             "count": 1,
             "role": "dummy",
             "name": "Sp"
-          },
-          {
-            "count": 13,
-            "role": "melee",
-            "name": "Ths"
           }
         ],
         "right_tools": [
@@ -2309,11 +2274,6 @@
             "count": 19,
             "role": "ranged",
             "name": "Hc"
-          },
-          {
-            "count": 19,
-            "role": "ranged",
-            "name": "Hc"
           }
         ],
         "left_tools": [
@@ -2330,11 +2290,6 @@
             "count": 19,
             "role": "ranged",
             "name": "Hc"
-          },
-          {
-            "count": 19,
-            "role": "melee",
-            "name": "Ths"
           }
         ],
         "right_tools": [
@@ -2621,16 +2576,6 @@
             "count": 20,
             "role": "ranged",
             "name": "Hc"
-          },
-          {
-            "count": 14,
-            "role": "ranged",
-            "name": "Hc"
-          },
-          {
-            "count": 4,
-            "role": "melee",
-            "name": "Ths"
           }
         ],
         "left_tools": [],
@@ -2758,7 +2703,12 @@
           {
             "count": 1,
             "role": "dummy",
-            "name": "martyr"
+            "name": "Sp"
+          },
+          {
+            "count": 20,
+            "role": "ranged",
+            "name": "Hc"
           }
         ],
         "right_tools": [
@@ -15250,13 +15200,7 @@
             "name": "man"
           }
         ],
-        "front_troops": [
-          {
-            "count": 1,
-            "role": "melee",
-            "name": "troop"
-          }
-        ],
+        "front_troops": [],
         "front_tools": [
           {
             "count": 24,
