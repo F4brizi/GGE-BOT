@@ -35,6 +35,114 @@ try {
 
 const BASIC_DUMMY_IDS = [601, 602, 603, 607, 608, 652, 746]
 
+// Precomputed table of min victories per level for Great Empire (kingdomID = 0)
+const minVictoriesTable = []
+for (let v = 0; v <= 3000; v++) {
+    const lvl = Math.floor(1.9 * Math.pow(v, 0.555)) + 1
+    if (minVictoriesTable[lvl] === undefined) {
+        minVictoriesTable[lvl] = v
+    }
+}
+
+function resolveBarronTactic(areaInfo, kingdomID) {
+    const victories = Number(areaInfo.extraData?.[1] || 0)
+    const baseOffset = [1, 35, 20, 45][kingdomID] ?? 0
+    const level = Math.floor(1.9 * Math.pow(victories, 0.555)) + baseOffset
+
+    if (kingdomID !== KingdomID.greatEmpire || !greatEmpireTactics) {
+        return { level, tactic: null, variantKey: String(level), subIdx: 1, victories }
+    }
+
+    const minV = minVictoriesTable[level] ?? victories
+    const subIdx = Math.max(1, victories - minV + 1)
+    const variantKey = `${level}.${subIdx}`
+
+    const tactic = greatEmpireTactics[variantKey] || greatEmpireTactics[String(level)] || null
+    return { level, tactic, variantKey, subIdx, victories }
+}
+
+function allocateUnitsToFlank(flankSlots, requirements, mPool, rPool, dPool, maxCapacity) {
+    if (!flankSlots || flankSlots.length === 0) return 0
+    let slotIdx = 0
+    let totalAssigned = 0
+    for (const req of (requirements || [])) {
+        let needed = req.count || 0
+        if (req.fill || needed <= 0) needed = Math.max(0, maxCapacity - totalAssigned)
+
+        let pool = mPool
+        if (req.role === "dummy") {
+            pool = dPool.length > 0 ? dPool : (mPool.length > 0 ? mPool : rPool)
+        } else if (req.role === "ranged") {
+            pool = rPool.length > 0 ? rPool : mPool
+        } else if (req.role === "melee") {
+            pool = mPool.length > 0 ? mPool : rPool
+        }
+
+        while (needed > 0 && slotIdx < flankSlots.length) {
+            const slot = flankSlots[slotIdx]
+            if (slot[0] !== -1 && slot[1] > 0) {
+                slotIdx++
+                continue
+            }
+            const unitIdx = pool.findIndex(u => u.amount > 0)
+            if (unitIdx === -1) {
+                if (req.role !== "dummy") {
+                    const fallback = (pool === mPool) ? rPool : mPool
+                    const fbIdx = fallback.findIndex(u => u.amount > 0)
+                    if (fbIdx !== -1) {
+                        pool = fallback
+                        continue
+                    }
+                }
+                break
+            }
+            const unit = pool[unitIdx]
+            const take = Math.min(unit.amount, needed)
+            slot[0] = unit.unitInfo.wodID
+            slot[1] = take
+            unit.amount -= take
+            needed -= take
+            totalAssigned += take
+            if (unit.amount <= 0) pool.splice(unitIdx, 1)
+            slotIdx++
+        }
+    }
+    return totalAssigned
+}
+
+function allocateToolsToFlank(flankSlots, requirements, wPool, sPool, gPool) {
+    if (!flankSlots || flankSlots.length === 0) return 0
+    let slotIdx = 0
+    let totalAssigned = 0
+    for (const req of (requirements || [])) {
+        let needed = req.count || 0
+        let pool = wPool
+        if (req.type === "shield") pool = sPool
+        else if (req.type === "gate") pool = gPool
+        else pool = wPool
+
+        while (needed > 0 && slotIdx < flankSlots.length) {
+            const slot = flankSlots[slotIdx]
+            if (slot[0] !== -1 && slot[1] > 0) {
+                slotIdx++
+                continue
+            }
+            const toolIdx = pool.findIndex(t => t.amount > 0)
+            if (toolIdx === -1) break
+            const tool = pool[toolIdx]
+            const take = Math.min(tool.amount, needed)
+            slot[0] = tool.unitInfo.wodID
+            slot[1] = take
+            tool.amount -= take
+            needed -= take
+            totalAssigned += take
+            if (tool.amount <= 0) pool.splice(toolIdx, 1)
+            slotIdx++
+        }
+    }
+    return totalAssigned
+}
+
 async function barronHit(type, kingdomID, options, maxLevel) {
     const getLevel = victorys =>
         Math.floor(1.9 * Math.pow(victorys, .555)) + ([1, 35, 20, 45][kingdomID] ?? 0)
@@ -120,6 +228,7 @@ async function barronHit(type, kingdomID, options, maxLevel) {
         const attackerRangeTroops = []
         const attackerShieldTools = []
         const attackerWallTools = []
+        const attackerGateTools = []
 
         for (let i = 0; i < baseCastle.unitInventory.length; i++) {
             const unit = baseCastle.unitInventory[i]
@@ -135,6 +244,8 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                     attackerWallTools.push(unit)
                 else if (unit.unitInfo.defRangeBonus)
                     attackerShieldTools.push(unit)
+                else if (unit.unitInfo.gateBonus)
+                    attackerGateTools.push(unit)
             }
             else if (unit.unitInfo.fightType == 0 &&
                 unit.unitInfo.beefSupply == undefined) {
@@ -145,7 +256,11 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 if (options.useDogs && unit.unitInfo.wodID != 277)
                     continue
 
-                if (BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) || unit.unitInfo.group === "Keep") {
+                const isDummyCandidate = BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) ||
+                    unit.unitInfo.group === "Keep" ||
+                    (unit.unitInfo.group === "Barracks" && Number(unit.unitInfo.costC1 || 0) <= 85 && !unit.unitInfo.costC2)
+
+                if (isDummyCandidate) {
                     dummyTroops.push(unit)
                 }
 
@@ -166,6 +281,7 @@ async function barronHit(type, kingdomID, options, maxLevel) {
             attackerRangeTroops,
             attackerShieldTools,
             attackerWallTools,
+            attackerGateTools,
             totalAttackTroops
         }
     }
@@ -254,15 +370,16 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                             movement.targetAttack.x == areaInfo.x && movement.targetAttack.y == areaInfo.y))
                             continue
 
-                        const level = getLevel(areaInfo.extraData[1], kingdomID)
-                        const tactic = (isGreatEmpire && greatEmpireTactics) ? greatEmpireTactics[level] : null
+                        const { level, tactic, variantKey } = resolveBarronTactic(areaInfo, kingdomID)
                         let requiredTroops = 10
-                        if (tactic && tactic.waves && tactic.waves[0]) {
-                            const w0 = tactic.waves[0]
-                            const req = (w0.left_troops.reduce((s, x) => s + x.count, 0) +
-                                         w0.front_troops.reduce((s, x) => s + x.count, 0) +
-                                         w0.right_troops.reduce((s, x) => s + x.count, 0))
-                            if (req > 0) requiredTroops = req
+                        if (tactic && tactic.waves && tactic.waves.length > 0) {
+                            let totalReq = 0
+                            tactic.waves.forEach(w => {
+                                totalReq += ((w.left_troops || []).reduce((s, x) => s + (x.count || 0), 0) +
+                                             (w.front_troops || []).reduce((s, x) => s + (x.count || 0), 0) +
+                                             (w.right_troops || []).reduce((s, x) => s + (x.count || 0), 0))
+                            })
+                            if (totalReq > 0) requiredTroops = totalReq
                         }
 
                         if (troopData.totalAttackTroops >= requiredTroops) {
@@ -272,6 +389,7 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                                     base,
                                     areaInfo,
                                     level,
+                                    variantKey,
                                     tactic,
                                     troopData,
                                     distSq: item.distSq,
@@ -293,8 +411,9 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 const castle = bestCandidate.base
                 const areaInfo = bestCandidate.areaInfo
                 const level = bestCandidate.level
+                const variantKey = bestCandidate.variantKey
                 const tactic = bestCandidate.tactic
-                const { dummyTroops, attackerMeleeTroops, attackerRangeTroops, attackerShieldTools, attackerWallTools } = bestCandidate.troopData
+                const { dummyTroops, attackerMeleeTroops, attackerRangeTroops, attackerShieldTools, attackerWallTools, attackerGateTools } = bestCandidate.troopData
 
                 // Economic sorting: cheapest/weakest units first to protect elite event troops
                 const sortEconomic = (a, b) => {
@@ -302,20 +421,48 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                     const bIsElite = (b.unitInfo.group !== "Barracks" || (b.unitInfo.costC2 && b.unitInfo.costC2 > 0)) ? 1 : 0
                     if (aIsElite !== bIsElite) return aIsElite - bIsElite
 
+                    if (aIsElite === 0) {
+                        // Barracks recruit-able: cheapest / lowest coin cost first
+                        const aCost = Number(a.unitInfo.costC1 || 0)
+                        const bCost = Number(b.unitInfo.costC1 || 0)
+                        if (aCost !== bCost) return aCost - bCost
+                        const aPower = Number(a.unitInfo.meleeAttack || a.unitInfo.rangeAttack || 0)
+                        const bPower = Number(b.unitInfo.meleeAttack || b.unitInfo.rangeAttack || 0)
+                        return aPower - bPower
+                    } else {
+                        // Event / Elite troops: sort strongest first to win cleanly when used
+                        const aPower = Number(a.unitInfo.meleeAttack || a.unitInfo.rangeAttack || 0)
+                        const bPower = Number(b.unitInfo.meleeAttack || b.unitInfo.rangeAttack || 0)
+                        return bPower - aPower
+                    }
+                }
+
+                // Dummy units: strictly cheapest basic units first
+                dummyTroops.sort((a, b) => {
+                    const aCost = Number(a.unitInfo.costC1 || 0)
+                    const bCost = Number(b.unitInfo.costC1 || 0)
+                    if (aCost !== bCost) return aCost - bCost
                     const aPower = Number(a.unitInfo.meleeAttack || a.unitInfo.rangeAttack || 0)
                     const bPower = Number(b.unitInfo.meleeAttack || b.unitInfo.rangeAttack || 0)
                     return aPower - bPower
+                })
+
+                // Tools: non-ruby (wooden / stone / workshop) tools first
+                const sortTools = (a, b) => {
+                    const aIsRuby = (a.unitInfo.costC2 && Number(a.unitInfo.costC2) > 0) ? 1 : 0
+                    const bIsRuby = (b.unitInfo.costC2 && Number(b.unitInfo.costC2) > 0) ? 1 : 0
+                    if (aIsRuby !== bIsRuby) return aIsRuby - bIsRuby
+                    const aBonus = Number(a.unitInfo.wallBonus || a.unitInfo.defRangeBonus || a.unitInfo.gateBonus || 0)
+                    const bBonus = Number(b.unitInfo.wallBonus || b.unitInfo.defRangeBonus || b.unitInfo.gateBonus || 0)
+                    return aBonus - bBonus
                 }
 
-                attackerWallTools.sort((a, b) =>
-                    Number(a.unitInfo.wallBonus) - Number(b.unitInfo.wallBonus))
-
-                attackerShieldTools.sort((a, b) =>
-                    Number(a.unitInfo.defRangeBonus) - Number(b.unitInfo.defRangeBonus))
+                attackerWallTools.sort(sortTools)
+                attackerShieldTools.sort(sortTools)
+                attackerGateTools.sort(sortTools)
 
                 attackerMeleeTroops.sort(sortEconomic)
                 attackerRangeTroops.sort(sortEconomic)
-                dummyTroops.sort(sortEconomic)
 
                 const autoConfigure = !(options.attackLeft || options.attackRight || options.attackMiddle)
                 const commanderStats = commander.getEffects()
@@ -324,45 +471,23 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                     : parseInt(options.attackWaves || 2)
                 const attackInfo = getAttackInfo(kingdomID, castle, areaInfo, commander, level, waveCount, options, commanderStats.additionalWaves)
 
+                const maxTroopFront = getAmountSoldiersFront(level, commanderStats.attackUnitAmountFront)
+                const maxTroopFlank = getAmountSoldiersFlank(level, commanderStats.attackUnitAmountFlank)
+
                 if (tactic && tactic.waves && tactic.waves.length > 0) {
                     // TÁCTICA QUIRÚRGICA: Wiki Presets
                     tactic.waves.forEach((tWave, wIdx) => {
                         const wave = attackInfo.A[wIdx]
                         if (!wave) return
 
-                        const flanks = [
-                            { flank: wave.L, troops: tWave.left_troops, tools: tWave.left_tools },
-                            { flank: wave.M, troops: tWave.front_troops, tools: tWave.front_tools },
-                            { flank: wave.R, troops: tWave.right_troops, tools: tWave.right_tools }
-                        ]
+                        allocateUnitsToFlank(wave.L.U, tWave.left_troops, attackerMeleeTroops, attackerRangeTroops, dummyTroops, maxTroopFlank)
+                        allocateToolsToFlank(wave.L.T, tWave.left_tools, attackerWallTools, attackerShieldTools, attackerGateTools)
 
-                        flanks.forEach(({ flank, troops, tools }) => {
-                            if (tools && tools.length > 0 && flank.T) {
-                                tools.forEach((tReq, slotIdx) => {
-                                    const toolPool = (tReq.type === "shield") ? attackerShieldTools : attackerWallTools
-                                    if (flank.T[slotIdx]) {
-                                        assignUnit(flank.T[slotIdx], toolPool, tReq.count)
-                                    }
-                                })
-                            }
+                        allocateUnitsToFlank(wave.M.U, tWave.front_troops, attackerMeleeTroops, attackerRangeTroops, dummyTroops, maxTroopFront)
+                        allocateToolsToFlank(wave.M.T, tWave.front_tools, attackerWallTools, attackerShieldTools, attackerGateTools)
 
-                            if (troops && troops.length > 0 && flank.U) {
-                                troops.forEach((uReq, slotIdx) => {
-                                    let pool = attackerMeleeTroops
-                                    if (uReq.role === "dummy") {
-                                        pool = dummyTroops.length > 0 ? dummyTroops : attackerMeleeTroops
-                                    } else if (uReq.role === "ranged") {
-                                        pool = attackerRangeTroops.length > 0 ? attackerRangeTroops : attackerMeleeTroops
-                                    } else if (uReq.role === "melee") {
-                                        pool = attackerMeleeTroops.length > 0 ? attackerMeleeTroops : attackerRangeTroops
-                                    }
-
-                                    if (flank.U[slotIdx]) {
-                                        assignUnit(flank.U[slotIdx], pool, uReq.count)
-                                    }
-                                })
-                            }
-                        })
+                        allocateUnitsToFlank(wave.R.U, tWave.right_troops, attackerMeleeTroops, attackerRangeTroops, dummyTroops, maxTroopFlank)
+                        allocateToolsToFlank(wave.R.T, tWave.right_tools, attackerWallTools, attackerShieldTools, attackerGateTools)
                     })
                 } else {
                     const maxTroopFront = getAmountSoldiersFront(level, commanderStats.attackUnitAmountFront)
@@ -458,7 +583,7 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 const baseName = castle.areaInfo.name ? `${castle.areaInfo.name} (${castle.areaInfo.x}:${castle.areaInfo.y})` : `Base (${castle.areaInfo.x}:${castle.areaInfo.y})`
                 const targetDistance = Math.round(Math.sqrt(Math.pow(castle.areaInfo.x - areaInfo.x, 2) + Math.pow(castle.areaInfo.y - areaInfo.y, 2)))
 
-                return { obj, baseName, targetDistance }
+                return { obj, baseName, targetDistance, level, variantKey }
             })
 
             if (!attackInfo) {
@@ -466,8 +591,9 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 return false
             }
             
-            const { obj, baseName, targetDistance } = attackInfo
-            console.info("hittingTargetAttack", KingdomID[kingdomID], ' ', 'C', obj.AAM.UM.L.VIS + 1, ' ', obj.AAM.M.TA[1], ':', obj.AAM.M.TA[2], "from", baseName, `[${targetDistance} tiles]`, pretty(Math.round(1000000000 * Math.abs(Math.max(0, obj.AAM.M.TT - obj.AAM.M.PT))), 's'), "tillImpactAttack")
+            const { obj, baseName, targetDistance, level, variantKey } = attackInfo
+            const variantLabel = (isGreatEmpire && variantKey) ? `Lvl ${level} (${variantKey})` : `Lvl ${level}`
+            console.info("hittingTargetAttack", KingdomID[kingdomID], variantLabel, 'C' + (obj.AAM.UM.L.VIS + 1), obj.AAM.M.TA[1] + ':' + obj.AAM.M.TA[2], "from", baseName, `[${targetDistance} tiles]`, pretty(Math.round(1000000000 * Math.abs(Math.max(0, obj.AAM.M.TT - obj.AAM.M.PT))), 's'), "tillImpactAttack")
             return true
         } catch (e) {
             freeCommander(commander.lordID)
