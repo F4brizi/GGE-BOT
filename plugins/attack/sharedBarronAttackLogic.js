@@ -71,6 +71,30 @@ function resolveBarronTactic(areaInfo, kingdomID) {
     return { level, tactic, variantKey, subIdx, victories }
 }
 
+function getUnitMatcher(req) {
+    if (!req) return null
+    if (req.role === "dummy") return null
+    const name = (req.name || "").toLowerCase().trim().replace(/^[\+\*\s]+/, '')
+
+    // 1. Heavy Ranged: Hc, Vhc, Hcb, etc. (Tier 2/3 ranged, rangeAttack >= 85)
+    if (['hc', 'hcb', 'vhc', 'vcb'].includes(name) || name.includes('hc')) {
+        return (u) => Number(u.unitInfo.rangeAttack || 0) >= 85
+    }
+    // 2. Light / Basic Ranged: Cb, Crossbowmen, Bow, Bowman (Tier 1 ranged, rangeAttack < 85)
+    if (['cb', 'crossbowmen', 'bow', 'bm'].includes(name) || name.includes('cb')) {
+        return (u) => Number(u.unitInfo.rangeAttack || 0) < 85
+    }
+    // 3. Heavy Melee: Ths, Th, Vmm, Vm, Berserkers, Knights (Tier 2/3 melee, meleeAttack >= 100)
+    if (['ths', 'th', 'vmm', 'vm', 'beserkers', 'knight', 'knights'].includes(name) || name.includes('ths') || name.includes('vmm')) {
+        return (u) => Number(u.unitInfo.meleeAttack || 0) >= 100
+    }
+    // 4. Light / Basic Melee: Mm, Macemen, Sw, Sm (Tier 1 melee, meleeAttack < 100)
+    if (['mm', 'macemen', 'sw', 'sm'].includes(name) || name.includes('mm')) {
+        return (u) => Number(u.unitInfo.meleeAttack || 0) < 100
+    }
+    return null
+}
+
 function allocateUnitsToFlank(flankSlots, requirements, mPool, rPool, dPool, maxCapacity) {
     if (!flankSlots || flankSlots.length === 0) return 0
     let slotIdx = 0
@@ -88,13 +112,25 @@ function allocateUnitsToFlank(flankSlots, requirements, mPool, rPool, dPool, max
             pool = mPool.length > 0 ? mPool : rPool
         }
 
+        const matcher = getUnitMatcher(req)
+
         while (needed > 0 && slotIdx < flankSlots.length) {
             const slot = flankSlots[slotIdx]
             if (slot[0] !== -1 && slot[1] > 0) {
                 slotIdx++
                 continue
             }
-            const unitIdx = pool.findIndex(u => u.amount > 0)
+
+            // Priority 1: Match exact requested archetype (e.g. Hc vs Cb, Ths vs Mm)
+            let unitIdx = -1
+            if (matcher) {
+                unitIdx = pool.findIndex(u => u.amount > 0 && matcher(u))
+            }
+            // Priority 2: Fallback to any available unit in pool
+            if (unitIdx === -1) {
+                unitIdx = pool.findIndex(u => u.amount > 0)
+            }
+
             if (unitIdx === -1) {
                 if (req.role !== "dummy") {
                     const fallback = (pool === mPool) ? rPool : mPool
@@ -266,24 +302,41 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 if (options.useDogs && unit.unitInfo.wodID != 277)
                     continue
 
+                const isBarracksUnit = unit.unitInfo.name === "Barracks" || unit.unitInfo.group === "Barracks"
                 const isDummyCandidate = BASIC_DUMMY_IDS.includes(unit.unitInfo.wodID) ||
+                    unit.unitInfo.name === "Keep" ||
                     unit.unitInfo.group === "Keep" ||
-                    (unit.unitInfo.group === "Barracks" && Number(unit.unitInfo.costC1 || 0) <= 85 && !unit.unitInfo.costC2)
+                    (isBarracksUnit && Number(unit.unitInfo.costC1 || 0) <= 85 && !unit.unitInfo.costC2)
+
+                const clonedUnit = { unitInfo: unit.unitInfo, amount: unit.amount }
 
                 if (isDummyCandidate) {
-                    dummyTroops.push(unit)
+                    dummyTroops.push(clonedUnit)
                 }
 
                 if (unit.unitInfo.role == "melee")
-                    attackerMeleeTroops.push(unit)
+                    attackerMeleeTroops.push(clonedUnit)
                 else if (unit.unitInfo.role == "ranged")
-                    attackerRangeTroops.push(unit)
+                    attackerRangeTroops.push(clonedUnit)
             }
         }
 
         let totalAttackTroops = 0
-        attackerRangeTroops.forEach(e => totalAttackTroops += e.amount)
-        attackerMeleeTroops.forEach(e => totalAttackTroops += e.amount)
+        let heavyRanged = 0
+        let lightRanged = 0
+        let heavyMelee = 0
+        let lightMelee = 0
+
+        for (const e of attackerRangeTroops) {
+            totalAttackTroops += e.amount
+            if (Number(e.unitInfo.rangeAttack || 0) >= 85) heavyRanged += e.amount
+            else lightRanged += e.amount
+        }
+        for (const e of attackerMeleeTroops) {
+            totalAttackTroops += e.amount
+            if (Number(e.unitInfo.meleeAttack || 0) >= 100) heavyMelee += e.amount
+            else lightMelee += e.amount
+        }
 
         return {
             dummyTroops,
@@ -292,7 +345,11 @@ async function barronHit(type, kingdomID, options, maxLevel) {
             attackerShieldTools,
             attackerWallTools,
             attackerGateTools,
-            totalAttackTroops
+            totalAttackTroops,
+            heavyRanged,
+            lightRanged,
+            heavyMelee,
+            lightMelee
         }
     }
 
@@ -382,17 +439,41 @@ async function barronHit(type, kingdomID, options, maxLevel) {
 
                         const { level, tactic, variantKey } = resolveBarronTactic(areaInfo, kingdomID)
                         let requiredTroops = 10
+                        let reqHeavyRanged = 0
+                        let reqLightRanged = 0
+                        let reqHeavyMelee = 0
+                        let reqLightMelee = 0
+
                         if (tactic && tactic.waves && tactic.waves.length > 0) {
                             let totalReq = 0
                             tactic.waves.forEach(w => {
-                                totalReq += ((w.left_troops || []).reduce((s, x) => s + (x.count || 0), 0) +
-                                             (w.front_troops || []).reduce((s, x) => s + (x.count || 0), 0) +
-                                             (w.right_troops || []).reduce((s, x) => s + (x.count || 0), 0))
+                                const allFlanks = [w.left_troops || [], w.front_troops || [], w.right_troops || []]
+                                allFlanks.forEach(flank => {
+                                    flank.forEach(req => {
+                                        const count = req.count || 0
+                                        totalReq += count
+                                        const name = (req.name || "").toLowerCase().trim().replace(/^[\+\*\s]+/, '')
+                                        if (['hc', 'hcb', 'vhc', 'vcb'].includes(name) || name.includes('hc')) {
+                                            reqHeavyRanged += count
+                                        } else if (['cb', 'crossbowmen', 'bow', 'bm'].includes(name) || name.includes('cb')) {
+                                            reqLightRanged += count
+                                        } else if (['ths', 'th', 'vmm', 'vm', 'beserkers', 'knight', 'knights'].includes(name) || name.includes('ths') || name.includes('vmm')) {
+                                            reqHeavyMelee += count
+                                        } else if (['mm', 'macemen', 'sw', 'sm'].includes(name) || name.includes('mm')) {
+                                            reqLightMelee += count
+                                        }
+                                    })
+                                })
                             })
                             if (totalReq > 0) requiredTroops = totalReq
                         }
 
-                        if (troopData.totalAttackTroops >= requiredTroops) {
+                        // Check total troops and specific archetype availability so we never send weak light troops to high targets
+                        const hasEnoughTroops = troopData.totalAttackTroops >= requiredTroops &&
+                            (reqHeavyRanged === 0 || troopData.heavyRanged >= reqHeavyRanged) &&
+                            (reqHeavyMelee === 0 || troopData.heavyMelee >= reqHeavyMelee)
+
+                        if (hasEnoughTroops) {
                             // Valid candidate for this base!
                             if (!bestCandidate || item.distSq < bestCandidate.distSq) {
                                 bestCandidate = {
@@ -426,9 +507,16 @@ async function barronHit(type, kingdomID, options, maxLevel) {
                 const { dummyTroops, attackerMeleeTroops, attackerRangeTroops, attackerShieldTools, attackerWallTools, attackerGateTools } = bestCandidate.troopData
 
                 // Economic sorting: cheapest/weakest units first to protect elite event troops
+                const isBarracks = (unit) => {
+                    const info = unit.unitInfo || {}
+                    const isRuby = info.costC2 && Number(info.costC2) > 0
+                    if (isRuby) return false
+                    return info.name === "Barracks" || info.group === "Barracks" || (Number(info.costC1 || 0) > 0 && info.name !== "Eventunit")
+                }
+
                 const sortEconomic = (a, b) => {
-                    const aIsElite = (a.unitInfo.group !== "Barracks" || (a.unitInfo.costC2 && a.unitInfo.costC2 > 0)) ? 1 : 0
-                    const bIsElite = (b.unitInfo.group !== "Barracks" || (b.unitInfo.costC2 && b.unitInfo.costC2 > 0)) ? 1 : 0
+                    const aIsElite = isBarracks(a) ? 0 : 1
+                    const bIsElite = isBarracks(b) ? 0 : 1
                     if (aIsElite !== bIsElite) return aIsElite - bIsElite
 
                     if (aIsElite === 0) {
