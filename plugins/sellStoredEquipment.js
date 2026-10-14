@@ -50,11 +50,18 @@ class Equipment {
 
 const sellEquipment = e => {
     let equipmentSold = 0
+    const sellableRarities = [
+        equipmentType.common,
+        equipmentType.heroCommon,
+        equipmentType.rare,
+        equipmentType.heroRare
+    ]
+
     Array.from(e.I).map(e => new Equipment(e)).forEach(equipment => {
-        if([equipmentType.relic, equipmentType.heroRelic, equipmentType.unique, equipmentType.heroUnique]
-            .includes(equipment.rarity))
+        // Strictly only sell Common and Rare. Protect Epic, Legendary, Relic, and Unique!
+        if (!sellableRarities.includes(equipment.rarity))
             return
-        if(equipment.setID != -1)
+        if (equipment.setID != -1)
             return
 
         sendXT("seq", JSON.stringify({EID:equipment.id, LID:-1, EX:0, LFID:-1}))
